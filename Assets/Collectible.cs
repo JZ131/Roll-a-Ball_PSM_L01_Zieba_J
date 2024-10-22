@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Collectible : MonoBehaviour
 {
@@ -17,10 +18,7 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        collider.gameObject.GetComponent<MovementController>().score += 1;
-
-        Debug.Log("+1 point");
-        Debug.Log("score: " + collider.gameObject.GetComponent<MovementController>().score);
+        collider.gameObject.GetComponent<MovementController>().Score();
 
         gameObject.SetActive(false);
     }

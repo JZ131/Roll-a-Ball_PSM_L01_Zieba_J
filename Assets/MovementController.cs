@@ -1,16 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MovementController : MonoBehaviour
 {
-    public int score;
+    public int score = 0;
+
+    public GameObject points;
+
+    public GameObject nextLevel;
 
     public float thrust = 5f;
 
     public Rigidbody rb;
 
-    // Start is called before the first frame update
+    public Text scoreText;
+
+    public Text winText;
+
+    public void Score()
+    {
+        score += 1;
+        scoreText.text = "Score: " + score;
+
+        if (score == points.transform.childCount)
+        {
+            winText.text = "YOU WIN!!!";
+            nextLevel.SetActive(true);
+        }
+
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(2);
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody>();
