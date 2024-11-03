@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Poziom2.unity
     guid: 3a15f86416d1d784cbf13f4ffe641593
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 2329efee7852fac4ab1a333b944fa5f7
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

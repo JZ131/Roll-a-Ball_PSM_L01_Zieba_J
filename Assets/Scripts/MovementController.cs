@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MovementController : MonoBehaviour
 {
+    public event Action pickupEvent;
+
     public int score = 0;
 
     public GameObject points;
@@ -20,14 +23,22 @@ public class MovementController : MonoBehaviour
 
     public Text winText;
 
+    public int current_level = 1;
+
+    Scene scene;
+
     public void Score()
     {
         score += 1;
+
+        pickupEvent();
+
         scoreText.text = "Score: " + score;
 
         if (score == points.transform.childCount)
         {
             winText.text = "YOU WIN!!!";
+            current_level = current_level + 1;
             nextLevel.SetActive(true);
         }
 
@@ -35,15 +46,10 @@ public class MovementController : MonoBehaviour
 
     public void NextLevel()
     {
-        SceneManager.LoadScene(2);
-    }
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
+        SceneManager.LoadScene(scene.buildIndex + 1);
     }
 
-    void FixedUpdate()
-    {
+    private void MovementUpdate(){
         if (Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(0, 20, 0);
@@ -68,5 +74,18 @@ public class MovementController : MonoBehaviour
         {
             rb.AddForce(thrust, 0, 0);
         }
+    }
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        scene = SceneManager.GetActiveScene();
+
+    }
+
+    void FixedUpdate()
+    {
+        MovementUpdate();
     }
 }

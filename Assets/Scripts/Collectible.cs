@@ -6,9 +6,17 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Collectible : MonoBehaviour
 {
+    private AudioSource audioData;
+
+    private BoxCollider pointCollider;
+
+    private MeshRenderer mr;
+
     void Start()
     {
-        
+        audioData = GetComponent<AudioSource>();
+        pointCollider = GetComponent<BoxCollider>();
+        mr = GetComponent<MeshRenderer>();
     }
 
     void Update()
@@ -20,6 +28,11 @@ public class Collectible : MonoBehaviour
     {
         collider.gameObject.GetComponent<MovementController>().Score();
 
-        gameObject.SetActive(false);
+        audioData.Play();
+        pointCollider.enabled = false;
+        mr.enabled = false;
+        
+
+        /*gameObject.SetActive(false);*/
     }
 }
