@@ -9,12 +9,7 @@ public class Teleporter : MonoBehaviour
 
     void Start()
     {
-        
-    }
 
-    void Update()
-    {
-        
     }
 
     private void OnCollisionEnter(Collision collision)

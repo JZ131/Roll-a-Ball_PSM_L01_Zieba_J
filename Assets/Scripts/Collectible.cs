@@ -27,7 +27,7 @@ public class Collectible : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         collider.gameObject.GetComponent<MovementController>().Score();
-
+        
         audioData.Play();
         pointCollider.enabled = false;
         mr.enabled = false;

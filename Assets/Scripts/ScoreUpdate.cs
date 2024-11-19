@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class ScoreUpdate : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject player;
+    private MovementController player;
 
     [SerializeField]
     private Text scoreText;
@@ -17,6 +16,8 @@ public class ScoreUpdate : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementController>();
+        
+        player.pickupEvent += UpdateScoreText;
     }
 }

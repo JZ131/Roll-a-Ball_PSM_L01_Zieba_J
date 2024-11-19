@@ -1,53 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
-
 public class MovementController : MonoBehaviour
 {
     public event Action pickupEvent;
 
+    private float thrust = 5f;
+
+    private Rigidbody rb;
+
+    [SerializeField]
+    private GameObject points;
+
     public int score = 0;
 
-    public GameObject points;
+    [SerializeField]
+    private Text scoreText;
 
-    public GameObject nextLevel;
+    [SerializeField]
+    private Text winText;
 
-    public float thrust = 5f;
-
-    public Rigidbody rb;
-
-    public Text scoreText;
-
-    public Text winText;
-
-    public int current_level = 1;
-
-    Scene scene;
-
+    [SerializeField]
+    private GameObject nextLevel;
     public void Score()
     {
         score += 1;
 
-        pickupEvent();
+        pickupEvent?.Invoke();
 
-        scoreText.text = "Score: " + score;
+        /*scoreText.text = "Score: " + score;*/
 
         if (score == points.transform.childCount)
         {
             winText.text = "YOU WIN!!!";
-            current_level = current_level + 1;
             nextLevel.SetActive(true);
         }
 
     }
 
-    public void NextLevel()
-    {
-        SceneManager.LoadScene(scene.buildIndex + 1);
-    }
 
     private void MovementUpdate(){
         if (Input.GetKey(KeyCode.Space))
@@ -79,9 +74,6 @@ public class MovementController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        scene = SceneManager.GetActiveScene();
-
     }
 
     void FixedUpdate()
